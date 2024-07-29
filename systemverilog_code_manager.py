@@ -7,16 +7,15 @@
 import os
 import re
 import code_manager
-import hdl_code_manager
-from hdl_module_interface import HdlModuleInterface
+from m_code_manager.codemanagers.hdl.hdl_code_manager import HdlCodeManager
+from m_code_manager.codemanagers.hdl.hdl_module_interface import HdlModuleInterface
 
 LANG_IDENTIFIERS = ["systemverilog", "sv"]
 
 
-
 class SystemverilogCodeManager(code_manager.CodeManager):
 
-    PLACEHOLDERS = getattr(hdl_code_manager.HdlCodeManager, "PLACEHOLDERS")
+    PLACEHOLDERS = getattr(HdlCodeManager, "PLACEHOLDERS")
 
     def __init__(self):
         # why passing the language to the base class init? See (way too 
@@ -32,7 +31,7 @@ class SystemverilogCodeManager(code_manager.CodeManager):
 #       hdl code manager with a pass-through of hdl code  manager commands (see 
 #       run_code_manager_command). Creating soft links from the systemverilog 
 #       directory into the hdl directory is against all rules of portability.
-        self.hdl_code_manager = hdl_code_manager.HdlCodeManager()
+        self.hdl_code_manager = HdlCodeManager()
 
     def _command_module(self, module, **args):
         """create a systemverilog module skeleton
